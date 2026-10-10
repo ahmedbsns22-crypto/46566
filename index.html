@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="color-scheme" content="dark">
+<title>Aroma Ladies Spa — Reel</title>
+<style>
+:root{
+  --char:#171210; --taupe:#3b3330; --taupe2:#4b403b;
+  --champ:#e8d5b5; --rose:#c99580; --rose2:#a9715d; --ivory:#f6eee2;
+  --ar:"Cairo","Tajawal","Geeza Pro","SF Arabic","Segoe UI","Noto Naskh Arabic","Noto Sans Arabic",Tahoma,sans-serif;
+  --lat:"Cormorant Garamond","Playfair Display","Didot","Bodoni 72","Times New Roman",Georgia,serif;
+  --num:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --out:cubic-bezier(.16,1,.3,1);
+  --in:cubic-bezier(.55,0,.9,.4);
+  --pop:cubic-bezier(.34,1.56,.64,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:#000;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{-webkit-user-select:none;user-select:none;cursor:default}
+
+/* ============ STAGE (1080 x 1920, scaled to fit) ============ */
+#stage{
+  position:fixed;left:50%;top:50%;width:1080px;height:1920px;margin:-960px 0 0 -540px;
+  transform-origin:50% 50%;overflow:hidden;direction:rtl;color:var(--ivory);
+  font-family:var(--ar);-webkit-font-smoothing:antialiased;
+  background:radial-gradient(90% 55% at 50% 28%,#2d2522 0%,#1b1513 55%,#120d0c 100%);
+}
+#stage.reset *,#stage.reset *::before,#stage.reset *::after{animation:none!important;transition:none!important}
+.orb{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(201,149,128,.15),rgba(201,149,128,0) 68%)}
+.o1{width:900px;height:900px;left:-320px;top:160px;animation:drift1 26s linear infinite alternate}
+.o2{width:820px;height:820px;right:-320px;top:980px;animation:drift2 30s linear infinite alternate}
+@keyframes drift1{to{transform:translate(300px,420px)}}
+@keyframes drift2{to{transform:translate(-260px,-420px)}}
+.vig{position:absolute;inset:0;pointer-events:none;z-index:60;background:radial-gradient(120% 90% at 50% 50%,rgba(0,0,0,0) 62%,rgba(0,0,0,.38) 100%)}
+.safe{display:none;position:absolute;left:0;right:0;top:250px;bottom:340px;border:2px dashed rgba(255,0,0,.5);z-index:99;pointer-events:none}
+.showsafe .safe{display:block}
+#tc{display:none;position:absolute;left:20px;top:20px;z-index:100;font:600 34px/1 var(--num);color:#0f0;direction:ltr}
+.showtc #tc{display:block}
+
+.scene{position:absolute;inset:0;visibility:hidden;overflow:hidden}
+.scene.on{visibility:visible}
+.cam{position:absolute;inset:0}
+.logo{display:block;height:auto}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes draw{to{transform:scaleX(1)}}
+@keyframes rise{0%{opacity:0;transform:translateY(46px) scale(.96)}100%{opacity:1;transform:none}}
+@keyframes popIn{0%{opacity:0;transform:scale(.3) rotate(-12deg)}60%{opacity:1;transform:scale(1.14) rotate(4deg)}100%{opacity:1;transform:none}}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-16px) rotate(2deg)}}
+@keyframes inR{0%{opacity:0;transform:translateX(140%) scale(.92)}55%{opacity:1;transform:translateX(-18px) scale(1.035)}78%{transform:translateX(7px) scale(.992)}100%{opacity:1;transform:none}}
+@keyframes inL{0%{opacity:0;transform:translateX(-140%) scale(.92)}55%{opacity:1;transform:translateX(18px) scale(1.035)}78%{transform:translateX(-7px) scale(.992)}100%{opacity:1;transform:none}}
+@keyframes enterR{from{transform:translateX(100%)}to{transform:none}}
+@keyframes exitL{to{transform:translateX(-105%)}}
+
+/* ============ BUBBLES ============ */
+.bub{
+  position:relative;direction:rtl;text-align:right;font-weight:700;line-height:1.45;color:var(--ivory);
+  padding:36px 54px 42px;border-radius:64px;
+  background:linear-gradient(160deg,#4d423d,#352d2a);border:2px solid rgba(232,213,181,.22);
+  box-shadow:0 20px 40px rgba(0,0,0,.34);
+}
+.bub.a{border-bottom-left-radius:16px}
+.bub.b{background:linear-gradient(160deg,#8d6554,#6a4b3f);border-color:rgba(232,213,181,.28);border-bottom-right-radius:16px}
+.hl{position:relative;display:inline-block;white-space:nowrap}
+.hl::after{
+  content:"";position:absolute;left:0;right:0;bottom:-2px;height:7px;border-radius:5px;
+  background:linear-gradient(90deg,#c99580,#f2e0bf,#c99580);transform:scaleX(0);transform-origin:100% 50%;
+}
+.hl.rg::after{background:linear-gradient(90deg,#b77a66,#dcae98,#b77a66);height:6px}
+
+/* ============ SCENE 1 ============ */
+.s1 .logo{position:absolute;left:70px;top:276px;width:190px;opacity:0}
+.s1.on .logo{animation:rise .9s var(--out) 3.4s both}
+.s1.out{animation:exitL .7s var(--in) both}
+.s1.on .cam{transform-origin:62% 36%;animation:cam1 6s both}
+@keyframes cam1{
+  0%{transform:scale(1.14) translateX(50px);animation-timing-function:cubic-bezier(.2,1.2,.3,1)}
+  9%{transform:scale(1) translateX(0)}
+  20%{transform:scale(1);animation-timing-function:cubic-bezier(.5,0,.1,1)}
+  29%{transform:scale(1.38)}
+  38%{transform:scale(1.38);animation-timing-function:cubic-bezier(.5,0,.1,1)}
+  46%{transform:scale(1)}
+  100%{transform:scale(1.06) translateX(-18px)}
+}
+.col1{position:absolute;left:60px;right:60px;top:560px;display:flex;flex-direction:column;align-items:flex-end;gap:46px;direction:ltr}
+.b1{font-size:78px;opacity:0;padding:40px 60px 46px}
+.s1.on .b1{animation:inR .85s cubic-bezier(.22,.9,.3,1) .1s both}
+.s1.on .b1 .hl::after{animation:draw .6s var(--out) 1.25s both}
+.notif{position:absolute;left:-14px;top:-14px;width:34px;height:34px}
+.notif b{position:absolute;inset:0;border-radius:50%;background:var(--rose);border:3px solid #2a221f}
+.notif i{position:absolute;inset:0;border-radius:50%;border:3px solid var(--rose);opacity:0}
+.s1.on .notif i{animation:ring 1s ease-out .75s 3 both}
+.s1.on .notif i+i{animation-delay:.95s}
+.s1.on .notif b{animation:popIn .5s var(--pop) .6s both}
+@keyframes ring{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(3.2)}}
+.row2{position:relative;display:flex;align-items:flex-end;gap:26px;direction:ltr}
+.b2{font-size:66px;max-width:740px;opacity:0}
+.s1.on .b2{animation:inR .8s cubic-bezier(.22,.9,.3,1) 2.65s both}
+.avatar{width:138px;height:138px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:88px;line-height:1;
+  background:radial-gradient(circle at 35% 30%,#5a4d47,#33292a);border:2px solid rgba(232,213,181,.3);opacity:0;margin-bottom:6px}
+.s1.on .avatar{animation:popIn .6s var(--pop) 2.5s both}
+.react{position:absolute;left:8px;top:-84px;display:flex;gap:6px;font-size:76px;line-height:1}
+.react span{opacity:0}
+.s1.on .react span{animation:popIn .5s var(--pop) 4.0s both,floaty 3s ease-in-out 4.6s infinite}
+.s1.on .react span+span{animation-delay:4.35s,4.9s}
+
+/* ============ SCENE 2 ============ */
+.s2.on{animation:enterR .8s var(--out) both}
+.s2 .logo{position:absolute;left:70px;top:276px;width:170px;opacity:.95;transition:opacity .4s}
+.s2.out .logo{opacity:0}
+.s2.on .cam{transform-origin:62% 40%;animation:cam2 6.8s both}
+@keyframes cam2{
+  0%,45%{transform:scale(1);animation-timing-function:cubic-bezier(.5,0,.1,1)}
+  52%,62%{transform:scale(1.3);animation-timing-function:cubic-bezier(.5,0,.1,1)}
+  69%{transform:scale(1)}
+  100%{transform:scale(1.04)}
+}
+.chat{position:absolute;left:60px;right:60px;top:410px;display:flex;flex-direction:column;gap:58px;direction:ltr}
+.row{position:relative;max-width:800px;transition:transform .65s cubic-bezier(.6,0,.85,.35)}
+.row.l{align-self:flex-start}
+.row.r{align-self:flex-end}
+.s2.out .row.l{transform:translateX(-150%)}
+.s2.out .row.r{transform:translateX(150%)}
+.row .bub{font-size:60px;opacity:0}
+.s2.on .m1{animation:inL .8s cubic-bezier(.22,.9,.3,1) .75s both}
+.s2.on .m2{animation:inR .8s cubic-bezier(.22,.9,.3,1) 2.15s both}
+.s2.on .m3{animation:inL .8s cubic-bezier(.22,.9,.3,1) 5.05s both}
+.s2.on .m2 .hl::after{animation:draw .6s var(--out) 3.25s both}
+.typing{position:absolute;bottom:6px;display:flex;gap:12px;padding:26px 34px;border-radius:44px;background:#3b3330;border:2px solid rgba(232,213,181,.18);opacity:0}
+.row.l .typing{left:0}
+.row.r .typing{right:0}
+.typing i{display:block;width:16px;height:16px;border-radius:50%;background:var(--champ)}
+.s2.on .typing{animation:typ .7s ease both}
+.s2.on .typing i{animation:dotb .6s ease-in-out infinite}
+.s2.on .typing i+i{animation-delay:.12s}
+.s2.on .typing i+i+i{animation-delay:.24s}
+.s2.on .t2a{animation-delay:1.45s}
+.s2.on .t3a{animation-delay:4.35s}
+@keyframes typ{0%{opacity:0;transform:scale(.6)}15%{opacity:1;transform:scale(1)}85%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.9)}}
+@keyframes dotb{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(-9px);opacity:1}}
+.fl{position:absolute;font-size:96px;line-height:1;opacity:0}
+.s2.on .fl{animation:flUp 2.8s ease-out both}
+@keyframes flUp{0%{opacity:0;transform:translateY(50px) scale(.4)}22%{opacity:1;transform:translateY(0) scale(1.1)}100%{opacity:.0;transform:translateY(-130px) scale(1)}}
+.f1{left:820px;top:1070px}.f2{left:900px;top:960px}.f3{left:770px;top:880px}
+.s2.on .f1{animation-delay:5.5s}.s2.on .f2{animation-delay:5.75s}.s2.on .f3{animation-delay:6s}
+
+/* ============ SCENE 3 ============ */
+.s3.on .cam{transform-origin:50% 31%;animation:cam3 7s both}
+@keyframes cam3{
+  0%,27%{transform:scale(1.02);animation-timing-function:cubic-bezier(.5,0,.1,1)}
+  33%,44%{transform:scale(1.26);animation-timing-function:cubic-bezier(.5,0,.1,1)}
+  51%{transform:scale(1)}
+  100%{transform:scale(1.03)}
+}
+.grp{position:absolute;inset:0}
+.s3.out .grp{animation:grpOut .6s var(--in) both}
+@keyframes grpOut{to{opacity:0;transform:translateY(-130px) scale(.96)}}
+.t1,.t2{position:absolute;left:60px;right:60px;text-align:center;font-weight:800}
+.t1{top:540px;font-size:88px;line-height:1.35;color:var(--ivory)}
+.t2{top:1195px;font-size:68px;line-height:1.4;font-weight:700;color:var(--champ)}
+.w{display:inline-block;opacity:0}
+.s3.on .t1 .w{animation:rise .8s var(--out) .4s both}
+.s3.on .t1 .w:nth-child(2){animation-delay:.55s}
+.s3.on .t1 .w:nth-child(3){animation-delay:.7s}
+.s3.on .t1 .w:nth-child(4){animation-delay:.9s}
+.s3.on .t2 .w{animation:rise .8s var(--out) 3.4s both}
+.s3.on .t2 .w:nth-child(2){animation-delay:3.55s}
+.s3.on .t2 .w:nth-child(3){animation-delay:3.75s}
+.s3.on .t2 .w:nth-child(4){animation-delay:4.05s}
+.s3 .t1 .hl{color:var(--champ)}
+.s3.on .t1 .hl{animation:wordZ 1.6s cubic-bezier(.5,0,.1,1) 1.9s both}
+.s3.on .t1 .hl::after{animation:draw .6s var(--out) 2.05s both}
+@keyframes wordZ{0%{transform:scale(1)}30%,70%{transform:scale(1.38)}100%{transform:scale(1)}}
+.bigemo{position:absolute;left:0;right:0;top:830px;text-align:center;font-size:270px;line-height:1.1;opacity:0}
+.s3.on .bigemo{animation:popIn .9s var(--pop) 3s both}
+.bigemo span{display:inline-block}
+.s3.on .bigemo span{animation:floaty 3.4s ease-in-out 3.9s infinite}
+.acc{position:absolute;line-height:1;opacity:0}
+.s3.on .acc{animation:popIn .6s var(--pop) 3.3s both,floaty 3.6s ease-in-out 4.2s infinite}
+.a1{left:150px;top:880px;font-size:92px}
+.a2{right:140px;top:1010px;font-size:96px}
+.a3{right:260px;top:850px;font-size:58px}
+.s3.on .a2{animation-delay:3.55s,4.4s}
+.s3.on .a3{animation-delay:3.8s,4.6s}
+.sweepline{position:absolute;left:0;top:960px;width:1080px;height:5px;opacity:0;
+  background:linear-gradient(90deg,rgba(232,213,181,0),#e8d5b5 30%,#fff4e0 50%,#e8d5b5 70%,rgba(232,213,181,0))}
+.s3.on .sweepline{animation:sweepH .95s cubic-bezier(.6,0,.3,1) 5s both}
+@keyframes sweepH{0%{opacity:1;transform:translateX(-105%) scaleX(.6)}100%{opacity:1;transform:translateX(105%) scaleX(1.2)}}
+.logo3{position:absolute;left:0;right:0;top:700px;display:flex;justify-content:center;opacity:0}
+.s3.on .logo3{animation:logoIn 1s var(--out) 5.5s both}
+@keyframes logoIn{0%{opacity:0;transform:translateY(34px) scale(.92)}100%{opacity:1;transform:none}}
+.lw{position:relative;width:760px;overflow:hidden}
+.lw .logo{width:100%}
+.shine{position:absolute;top:-10%;bottom:-10%;left:0;width:26%;pointer-events:none;mix-blend-mode:screen;opacity:0;
+  background:linear-gradient(100deg,rgba(255,244,225,0),rgba(255,244,225,.34),rgba(255,244,225,0));transform:translateX(-160%) skewX(-18deg)}
+.s3.on .shine{animation:shine 1.1s ease-in-out 5.95s both}
+.s5.on .shine{animation:shine 1.1s ease-in-out 1.15s both}
+@keyframes shine{0%{opacity:1;transform:translateX(-160%) skewX(-18deg)}100%{opacity:1;transform:translateX(480%) skewX(-18deg)}}
+.s3.on .lw .logo{animation:bright 1s ease-in-out 6.05s both}
+.s5.on .lw .logo{animation:bright 1s ease-in-out 1.25s both}
+@keyframes bright{0%,100%{filter:brightness(1)}50%{filter:brightness(1.3)}}
+
+/* ============ SCENE 4 — FLAG ============ */
+.bg4{position:absolute;inset:0;background:#0d0a09;opacity:0}
+.s4.on .bg4{animation:fadeIn .9s ease-in-out .15s both}
+.glow4{position:absolute;left:-100px;right:-100px;top:380px;height:960px;opacity:0;
+  background:radial-gradient(50% 50% at 50% 45%,rgba(232,213,181,.2),rgba(122,98,86,.2) 42%,rgba(0,0,0,0) 74%)}
+.s4.on .glow4{animation:fadeIn 1.6s ease-out .6s both}
+.s4.on .cam{transform-origin:50% 36%;animation:cam4 6s both}
+@keyframes cam4{
+  0%{transform:scale(1.7);animation-timing-function:cubic-bezier(.3,0,.1,1)}
+  43%{transform:scale(1)}
+  100%{transform:scale(1.045)}
+}
+.dline{position:absolute;left:50%;top:50%;width:3000px;height:5px;margin-left:-1500px;opacity:0;
+  background:linear-gradient(90deg,rgba(232,213,181,0),#e8d5b5 38%,#fff4e0 50%,#e8d5b5 62%,rgba(232,213,181,0));
+  box-shadow:0 0 26px rgba(232,213,181,.45);transform:rotate(-32deg) translateY(-1500px)}
+.s4.on .dline{animation:diag 1.05s cubic-bezier(.65,0,.35,1) .05s both}
+@keyframes diag{0%{opacity:1;transform:rotate(-32deg) translateY(-1500px)}100%{opacity:1;transform:rotate(-32deg) translateY(1500px)}}
+.s4.out{animation:exitSlow .8s var(--in) both}
+@keyframes exitSlow{to{transform:translateX(-30%)}}
+.flagwrap{position:absolute;left:150px;top:520px;width:780px;height:480px;perspective:1700px}
+.drift{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateY(-10deg) rotateX(2deg)}
+.s4.on .drift{animation:drift 7s ease-in-out infinite alternate}
+@keyframes drift{0%{transform:rotateY(-14deg) rotateX(3deg) translateX(-8px)}100%{transform:rotateY(-3deg) rotateX(-2deg) translateX(10px)}}
+.flag{position:absolute;left:30px;top:70px;width:720px;height:360px;transform-style:preserve-3d;transform-origin:0 50%}
+.s4.on .flag{animation:unfurl 1.9s cubic-bezier(.16,1,.3,1) .45s both}
+@keyframes unfurl{0%{transform:rotateY(-84deg) scale(.7)}100%{transform:rotateY(0) scale(1)}}
+.strip{
+  position:absolute;top:0;height:100%;display:block;
+  background:
+    linear-gradient(90deg,#d90f23 0,#d90f23 25%,rgba(0,0,0,0) 25%),
+    linear-gradient(180deg,#00732f 0,#00732f 33.34%,#fff 33.34%,#fff 66.67%,#000 66.67%);
+  background-size:720px 360px;background-repeat:no-repeat;
+  animation:wave 2.6s ease-in-out infinite;animation-delay:calc(var(--i) * var(--d) * -1);
+}
+.strip::after{
+  content:"";position:absolute;inset:0;opacity:.3;
+  background:linear-gradient(90deg,rgba(0,0,0,.5),rgba(0,0,0,0) 48%,rgba(255,244,225,.3));
+  animation:fold 2.6s ease-in-out infinite;animation-delay:calc(var(--i) * var(--d) * -1 - .65s);
+}
+@keyframes wave{
+  0%,100%{transform:translate3d(0,calc(var(--a) * -15px),calc(var(--a) * 22px)) rotateY(calc(var(--a) * -9deg))}
+  50%{transform:translate3d(0,calc(var(--a) * 15px),calc(var(--a) * -22px)) rotateY(calc(var(--a) * 9deg))}
+}
+@keyframes fold{0%,100%{opacity:.08}50%{opacity:.95}}
+.pole{position:absolute;left:16px;top:60px;width:14px;height:560px;border-radius:7px;
+  background:linear-gradient(90deg,#8f7b66,#e8d5b5 45%,#8f7b66);-webkit-mask-image:linear-gradient(180deg,#000 55%,rgba(0,0,0,0));mask-image:linear-gradient(180deg,#000 55%,rgba(0,0,0,0))}
+.finial{position:absolute;left:9px;top:34px;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff4e0,#c9b08a 60%,#8f7b66)}
+.fshadow{position:absolute;left:72px;top:125px;width:760px;height:360px;opacity:0;
+  background:radial-gradient(60% 60% at 50% 50%,rgba(0,0,0,.5),rgba(0,0,0,0) 70%)}
+.s4.on .fshadow,.s4.on .pole,.s4.on .finial{animation:fadeIn 1.2s ease-out .9s both}
+.t4{position:absolute;left:60px;right:60px;top:1150px;text-align:center;font-size:76px;line-height:1.5;font-weight:700;color:var(--champ)}
+.t4 span{display:block;opacity:0}
+.s4.on .t4 span{animation:rise .9s var(--out) 3s both}
+.s4.on .t4 span+span{animation-delay:3.5s}
+
+/* ============ SCENE 5 — CTA ============ */
+.s5.on{animation:enterR .8s var(--out) both}
+.bg5{position:absolute;inset:0;background:radial-gradient(90% 55% at 50% 28%,#2d2522 0%,#1b1513 55%,#120d0c 100%)}
+.edge{position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(180deg,rgba(232,213,181,0),#e8d5b5 30%,#fff4e0 50%,#e8d5b5 70%,rgba(232,213,181,0))}
+.s5.on .edge{animation:fadeOut .9s ease-out .4s both}
+@keyframes fadeOut{from{opacity:1}to{opacity:0}}
+.lw5{position:absolute;left:150px;top:330px;width:780px}
+.lw5 .lw{width:780px;opacity:0}
+.s5.on .lw5 .lw{animation:logoIn 1s var(--out) .45s both}
+.brand{position:absolute;left:0;right:0;top:790px;text-align:center;font-family:var(--lat);font-size:76px;font-weight:600;letter-spacing:.06em;color:var(--champ);direction:ltr;opacity:0}
+.s5.on .brand{animation:rise .9s var(--out) 1.2s both}
+.rule{position:absolute;left:430px;right:430px;top:915px;height:3px;border-radius:2px;background:linear-gradient(90deg,rgba(201,149,128,0),var(--rose),rgba(201,149,128,0));transform:scaleX(0)}
+.s5.on .rule{animation:draw .8s var(--out) 1.55s both}
+.cta{position:absolute;left:60px;right:60px;top:965px;text-align:center;font-size:66px;line-height:1.5;font-weight:700;color:var(--ivory);opacity:0}
+.s5.on .cta{animation:rise .9s var(--out) 1.85s both}
+.phone{position:absolute;left:0;right:0;top:1150px;text-align:center;direction:ltr;font-family:var(--num);font-weight:300;font-size:50px;letter-spacing:.16em;color:var(--champ);opacity:0;text-decoration:none}
+.s5.on .phone{animation:rise 1s var(--out) 2.5s both}
+
+/* ============ LITE / REDUCED MOTION ============ */
+.lite .orb,.lite .cam,.lite .drift,.lite .strip,.lite .strip::after,.lite .bigemo span,.lite .acc,.lite .react span{animation:none!important}
+.lite .strip::after{opacity:var(--sh,.4)}
+.lite .acc,.lite .react span{opacity:1}
+.lite .s4.on .cam{transform:none}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="orb o1"></div><div class="orb o2"></div>
+
+  <!-- SCENE 1 : the unexpected chat -->
+  <section class="scene s1" id="s1">
+    <div class="cam">
+      <div class="col1">
+        <div class="bub a b1">
+          <span class="notif"><i></i><i></i><b></b></span>
+          بنات، <span class="hl">سؤال صريح</span>… 👀
+        </div>
+        <div class="row2">
+          <div class="bub b b2">متى آخر مرة دلّعتوا أعماركم؟ 🤍</div>
+          <div class="avatar">👩🏻‍🦰</div>
+          <div class="react"><span>👀</span><span>✨</span></div>
+        </div>
+      </div>
+    </div>
+    <img class="logo" src="logo.png" alt="Aroma Ladies Spa">
+  </section>
+
+  <!-- SCENE 2 : the girls reply -->
+  <section class="scene s2" id="s2">
+    <div class="cam">
+      <div class="chat">
+        <div class="row l"><div class="typing t1a"><i></i><i></i><i></i></div><div class="bub a m1">والله من زمان ما خذيت لي وقت! 😩</div></div>
+        <div class="row r"><div class="typing t2a"><i></i><i></i><i></i></div><div class="bub b m2">أنا أقول لج، جسمنا بعد <span class="hl rg">له حق علينا</span>! 👀</div></div>
+        <div class="row l"><div class="typing t3a"><i></i><i></i><i></i></div><div class="bub a m3">صدق! مرات نحتاج بس نرتاح وندلّع أعمارنا شوي. 🤍</div></div>
+      </div>
+      <div class="fl f1">😮‍💨</div><div class="fl f2">💆🏻‍♀️</div><div class="fl f3">✨</div>
+    </div>
+    <img class="logo" src="logo.png" alt="">
+  </section>
+
+  <!-- SCENE 3 : self-care reveal -->
+  <section class="scene s3" id="s3">
+    <div class="cam">
+      <div class="grp">
+        <div class="t1"><span class="w">شو رايكم</span> <span class="w">نخصص لنا</span> <span class="w"><span class="hl">وقت</span>؟</span> <span class="w">✨</span></div>
+        <div class="bigemo"><span>💆🏻‍♀️</span></div>
+        <div class="acc a1">🫧</div><div class="acc a2">🌸</div><div class="acc a3">🫧</div>
+        <div class="t2"><span class="w">مساج،</span> <span class="w">راحة،</span> <span class="w">وعناية بالجسم.</span> <span class="w">🤍</span></div>
+      </div>
+      <div class="sweepline"></div>
+    </div>
+    <div class="logo3"><div class="lw"><img class="logo" src="logo.png" alt="Aroma Ladies Spa"><i class="shine"></i></div></div>
+  </section>
+
+  <!-- SCENE 4 : UAE flag -->
+  <section class="scene s4" id="s4">
+    <div class="bg4"></div>
+    <div class="glow4"></div>
+    <div class="cam">
+      <div class="flagwrap">
+        <div class="fshadow"></div>
+        <div class="pole"></div><div class="finial"></div>
+        <div class="drift"><div class="flag" id="flag"></div></div>
+      </div>
+      <div class="t4"><span>من قلب الإمارات…</span><span>لحظات تستاهلينها. 🤍</span></div>
+    </div>
+    <div class="dline"></div>
+  </section>
+
+  <!-- SCENE 5 : brand + CTA -->
+  <section class="scene s5" id="s5">
+    <div class="bg5"></div>
+    <div class="edge"></div>
+    <div class="lw5"><div class="lw"><img class="logo" src="logo.png" alt="Aroma Ladies Spa"><i class="shine"></i></div></div>
+    <div class="brand">Aroma Ladies Spa</div>
+    <div class="rule"></div>
+    <div class="cta">دلّعي عمرج، واحجزي موعدج. 🤍</div>
+    <div class="phone">0544450244</div>
+  </section>
+
+  <div class="vig"></div>
+  <div class="safe"></div>
+  <div id="tc">0.00</div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var stage=document.getElementById('stage');
+  var q=location.search;
+  var lite=/[?&]lite/.test(q)||(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var loop=/[?&]loop/.test(q);
+  if(lite)stage.classList.add('lite');
+  if(/[?&]debug/.test(q))stage.classList.add('showtc','showsafe');
+  if(/[?&]safe/.test(q))stage.classList.add('showsafe');
+
+  /* fit 1080x1920 canvas to any viewport (computed once per resize, never during playback) */
+  function fit(){
+    var s=Math.min(innerWidth/1080,innerHeight/1920);
+    stage.style.transform='scale('+s+')';
+  }
+  addEventListener('resize',fit);addEventListener('orientationchange',fit);fit();
+
+  /* build the CSS-3D flag from vertical cloth strips */
+  (function(){
+    var flag=document.getElementById('flag');
+    var N=lite?12:24,W=720,sw=W/N,d=(2.6/24).toFixed(4);
+    var frag=document.createDocumentFragment();
+    for(var i=0;i<N;i++){
+      var el=document.createElement('i');
+      el.className='strip';
+      var a=i/(N-1);
+      var css='left:'+(i*sw).toFixed(2)+'px;width:'+(sw+1).toFixed(2)+'px;background-position:'+(-i*sw).toFixed(2)+'px 0;'+
+              '--i:'+(i*(24/N)).toFixed(2)+';--a:'+a.toFixed(3)+';--d:'+d+'s;';
+      if(lite){
+        css+='--sh:'+(0.5+0.45*Math.sin(i*0.9)).toFixed(2)+';transform:translateY('+(Math.sin(i*0.55)*8*a).toFixed(1)+'px);';
+      }
+      el.style.cssText=css;
+      frag.appendChild(el);
+    }
+    flag.appendChild(frag);
+  })();
+
+  /* ---------- ONE master timeline (seconds) ---------- */
+  function sc(id){return document.getElementById(id);}
+  function on(id){var e=sc(id);e.classList.remove('out');e.classList.add('on');}
+  function out(id){sc(id).classList.add('out');}
+  function off(id){var e=sc(id);e.classList.remove('on','out');}
+
+  var CUES=[
+    [0.00,function(){on('s1');}],               /* hook bubble + notification pulse   */
+    [5.75,function(){out('s1');on('s2');}],     /* horizontal camera pan to the chat  */
+    [6.60,function(){off('s1');}],
+    [12.60,function(){out('s2');}],             /* bubbles slide to the edges         */
+    [13.00,function(){on('s3');}],              /* self-care reveal                   */
+    [13.90,function(){off('s2');}],
+    [18.30,function(){out('s3');}],             /* content exits, champagne line, logo */
+    [20.00,function(){on('s4');}],              /* diagonal line + flag climax        */
+    [20.95,function(){off('s3');}],
+    [25.70,function(){out('s4');on('s5');}],    /* wipe into brand + CTA              */
+    [26.60,function(){off('s4');}]
+  ];
+  var END=30.0, LOOP_AT=33.5;
+
+  var raf=0,t0=0,idx=0,running=false,tcEl=document.getElementById('tc');
+
+  function tick(now){
+    var t=(now-t0)/1000;
+    while(idx<CUES.length&&t>=CUES[idx][0]){CUES[idx][1]();idx++;}
+    if(tcEl&&stage.classList.contains('showtc'))tcEl.textContent=t.toFixed(2);
+    if(loop&&t>=LOOP_AT){start(300);return;}
+    if(t<END+0.2||loop){raf=requestAnimationFrame(tick);}else{running=false;}
+  }
+
+  function clearAll(){
+    ['s1','s2','s3','s4','s5'].forEach(function(id){sc(id).classList.remove('on','out');});
+  }
+
+  var startTimer=0;
+  function start(delayMs){
+    cancelAnimationFrame(raf);clearTimeout(startTimer);
+    stage.classList.add('reset');
+    clearAll();
+    void stage.offsetWidth;                 /* flush: everything back to frame zero */
+    stage.classList.remove('reset');
+    void stage.offsetWidth;
+    idx=0;running=true;
+    startTimer=setTimeout(function(){
+      raf=requestAnimationFrame(function(now){t0=now;tick(now);});
+    },delayMs==null?0:delayMs);
+  }
+
+  /* wait for the logo (max 1.5 s) then start */
+  var imgs=[].slice.call(document.images);
+  var pending=imgs.length,began=false;
+  function begin(){if(began)return;began=true;start(450);}
+  imgs.forEach(function(im){
+    if(im.complete){pending--;}
+    else{
+      im.addEventListener('load',function(){if(--pending<=0)begin();});
+      im.addEventListener('error',function(){if(--pending<=0)begin();});
+    }
+  });
+  if(pending<=0)begin();
+  setTimeout(begin,1500);
+
+  /* restart: click / tap / R / Space */
+  document.addEventListener('click',function(){start(250);});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='r'||e.key==='R'||e.key===' '||e.key==='Enter'){e.preventDefault();start(250);}
+  });
+})();
+</script>
+</body>
+</html>
